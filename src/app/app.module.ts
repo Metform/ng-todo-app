@@ -14,7 +14,9 @@ const dbConfig = {
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'title', keypath: 'title', options: { unique: false } },
-      { name: 'description', keypath: 'description', options: { unique: false } }
+      { name: 'description', keypath: 'description', options: { unique: false } },
+      { name: 'done', keypath: 'done', options: { unique: false } },
+      { name: 'date', keypath: 'date', options: { unique: false } }
     ]
   }]
 }

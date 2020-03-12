@@ -1,3 +1,15 @@
-<p>
-  todo-list works!
-</p>
+<ul>
+  <li *ngFor='let todo of todoItems; let idx = index'>
+    <p>
+      <label [attr.data-tooltip]='todo.description' #todoTitle>
+        <input type="checkbox" [checked]='todo.done' (change)='onChange(todo.id)'/>
+        <span class="todo-title" [class.done]='todo.done'>{{ todo.title }}</span>
+      </label>
+    </p>
+    <div class="side-content">
+      <small>{{ todo.date | date:'medium' }}</small>
+      <a class="btn-floating btn-small waves-effect waves-light teal darken-1"><i class="material-icons">edit</i></a>
+      <a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">clear</i></a>
+    </div>
+  </li>
+</ul>
