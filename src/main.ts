@@ -8,5 +8,9 @@ if (environment.production) {
   enableProdMode();
 }
 
+if (!window.indexedDB) {
+  window.alert("Ваш браузер не поддерживат стабильную версию IndexedDB. Такие-то функции будут недоступны");
+}
+
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
