@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import { TodoFilterPipe } from './common/todo.filter.pipe';
+import { TermCheckPipe } from './common/term.check.pipe';
 
 const dbConfig = {
   name: 'TodoDb',
@@ -30,7 +31,8 @@ const dbConfig = {
     AppComponent,
     TodoListComponent,
     TodoFormComponent,
-    TodoFilterPipe
+    TodoFilterPipe,
+    TermCheckPipe
   ],
   imports: [
     FormsModule,

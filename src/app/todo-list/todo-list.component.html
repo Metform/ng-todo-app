@@ -15,7 +15,7 @@
           </label>
         </p>
         <div class="side-content">
-          <small>{{ todo.start | date:'medium' }}</small>
+          <small>{{ todo.start | term_checker:todo.end }}</small>
           <button class="btn-floating btn-small waves-effect waves-light teal darken-1" (click)='onEdit(todo.id)'><i class="material-icons">edit</i></button>
           <button type='reset' class="btn-floating btn-small waves-effect waves-light red" (click)='onRemove(todo.id)'><i class="material-icons">clear</i></button>
         </div>
