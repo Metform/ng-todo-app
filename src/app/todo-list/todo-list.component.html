@@ -4,6 +4,7 @@
         <label class="active">Todo title</label>
         <input type="text" [(ngModel)]='searchString'>
       </div>
+      <button class="waves-effect waves-light red btn-small" (click)='onClearDone()'>Clear completed</button>
 </div>
 <div class="todo-list-container">
     <ul class="todo-list-content" *ngIf='todoItems.length; else empty'>
@@ -21,14 +22,6 @@
         </div>
       </li>
     </ul>
-  <ul *ngIf='todoItems.length > 5' class="pagination" (click)='onPaginate($event)'>
-    <li class="disabled"><a href = "#!">
-      <i class="material-icons">chevron_left</i></a></li>
-      <li class="active"><a href = "#!">1</a></li>
-      <li class="waves-effect"><a href = "#!">2</a></li>
-      <li class="waves-effect"><a href = "#!">
-      <i class="material-icons">chevron_right</i></a></li>
-  </ul>
 </div>
 
 <ng-template #empty>

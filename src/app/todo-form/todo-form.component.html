@@ -1,6 +1,6 @@
 <div class="form-container">
     <div class="input-field">
-      <input type="text" (keydown.enter)=onAdd() #todoTitle>
+      <input type="text" (keydown.enter)=onUpdate() #todoTitle>
       <label class="active">Title</label>
     </div>
     <div class="input-field">
@@ -11,5 +11,10 @@
       <input type="text" class="datepicker">
       <label class="active">End date</label>
     </div>
-  <button class="btn-floating btn-small waves-effect waves-light teal darken-1" (click)='onAdd(todoInput)' [disabled]='!todoTitle.value'><i class="material-icons">add</i></button>
+  <button class="btn-floating btn-small waves-effect waves-light teal darken-1"
+    (click)='onUpdate(todoInput)' 
+    [disabled]='!todoTitle.value'>
+      <i class="material-icons" *ngIf='!updatedItem'>add</i>
+      <i class="material-icons" *ngIf='updatedItem'>edit</i>
+    </button>
 </div>

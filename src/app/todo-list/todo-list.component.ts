@@ -1,45 +1,50 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import * as M from '../../../node_modules/materialize-css/dist/js/materialize.min.js';
-import { ITodo, TodoService } from '../common/todo.service';
+import { AfterViewInit, Component, OnInit } from "@angular/core";
+import * as M from "../../../node_modules/materialize-css/dist/js/materialize.min.js";
+import { ITodo, TodoService } from "../common/todo.service";
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  selector: "app-todo-list",
+  templateUrl: "./todo-list.component.html",
+  styleUrls: ["./todo-list.component.css"]
 })
 export class TodoListComponent implements OnInit, AfterViewInit {
-  private searchString = ''
-  private todoItems: ITodo[] = []
-  constructor(private todoService: TodoService) { }
+  private searchString = "";
+  private todoItems: ITodo[] = [];
+  constructor(private todoService: TodoService) {}
 
   ngOnInit() {
-    this.todoService.todoCollection.subscribe({next: todoItems => this.todoItems = todoItems})
+    this.todoService.todoCollection.subscribe({
+      next: todoItems => {
+        if (!todoItems) return
+        this.todoItems = todoItems;
+      }
+    });
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      M.Tooltip.init(document.querySelectorAll('.tooltipped'), {
+      M.Tooltip.init(document.querySelectorAll(".tooltipped"), {
         enterDelay: 300,
         inDuration: 350,
-        position: 'left',
+        position: "left",
         transitionMovement: 20
-      })
-    }, 1)
+      });
+    }, 1);
   }
 
   onChecked(id: number) {
-    this.todoService.onChecked(id)
+    this.todoService.onChecked(id);
   }
 
   onEdit(id: number) {
-    this.todoService.onEdit(id)
+    this.todoService.onEdit(id);
   }
 
   onRemove(id: number) {
-    this.todoService.onRemove(id)
+    this.todoService.onRemove(id);
   }
 
-  onPaginate({ target: { textContent } }) {
-    console.log(textContent)
+  onClearDone() {
+    this.todoService.clearAllDone()
   }
 }

@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { NgxIndexedDBService } from "ngx-indexed-db";
-import { Observable, interval, from, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 export interface ITodo {
-  id?: number;
+  id: number;
   title: string;
   description: string;
   done: boolean;
@@ -16,6 +16,7 @@ export interface ITodo {
 })
 export class TodoService {
   public todoCollection = new BehaviorSubject<ITodo[]>([])
+  public onEditItem = new BehaviorSubject<ITodo>(null)
 
   constructor(private idbService: NgxIndexedDBService) {
     this.getAll()
@@ -46,8 +47,18 @@ export class TodoService {
     }
   }
 
-  onEdit(id: number) {
-    console.log(id);
+  async onEdit(id: number) {
+    const item = await this.idbService.getByKey('todoList', id)
+    this.onEditItem.next(item)
+  }
+
+  async edit(todo: ITodo) {
+    try {
+      await this.idbService.update('todoList', { id: todo.id, ...todo })
+      this.getAll()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async onRemove(id: number): Promise<any> {
@@ -57,5 +68,16 @@ export class TodoService {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  async clearAllDone() {
+    const items = this.todoCollection.value
+    for (const key in items) {
+        const item = items[key];
+        if (item.done) {
+          await this.idbService.deleteRecord('todoList', item.id)
+        }
+    }
+    this.getAll()
   }
 }
