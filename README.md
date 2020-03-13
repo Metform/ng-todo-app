@@ -1,6 +1,14 @@
-# NgTodoApp
+<img src='https://iran-tour-bucket.s3.eu-north-1.amazonaws.com/NgTodoApp+-+Google+Chrome+13.03.2020+13_21_56.png'></img>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.4.
+# Основные функции
+
+- Создание/удаление/редактирование/поиск(по названию)
+- Слежение за процессом выполнения
+- Весь функционал работает без сервера
+
+# Использовалось
+ - База данных Indexedb
+ - css фреймворк Materializecss 
 
 ## Development server
 
