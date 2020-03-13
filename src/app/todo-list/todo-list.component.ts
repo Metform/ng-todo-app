@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { ITodo } from '../app.component'
-import * as M from '../../../node_modules/materialize-css/dist/js/materialize.min.js'
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import * as M from '../../../node_modules/materialize-css/dist/js/materialize.js';
+import { TodoService } from '../common/todo.service.js';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,25 +8,29 @@ import * as M from '../../../node_modules/materialize-css/dist/js/materialize.mi
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit, AfterViewInit {
-  @Input() todoItems: ITodo[] = []
   @ViewChild('todoTitle') todoTitleEl: ElementRef
 
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     M.Tooltip.init(this.todoTitleEl.nativeElement, {
       enterDelay: 300,
+      inDuration: 350,
       position: 'left',
       transitionMovement: 20
     })
   }
 
-  onChange(id: string) {
-    this.todoItems.forEach(todo => todo.id === id ? todo.done = !todo.done : null)
+  onChecked(id: string) {
+    this.todoService.onChecked(id)
   }
 
+  onEdit(id: string) {}
+
+  onRemove(id: string) {
+    console.log(`id = `, id)
+    this.todoService.onRemove(id)
+  }
 }

@@ -23,7 +23,7 @@ li > div {
     justify-content: space-around;
 }
 
-li > div > a {
+button {
     margin-left: 7px;
 }
 
