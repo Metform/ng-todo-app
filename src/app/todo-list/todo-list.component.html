@@ -10,7 +10,7 @@
     <ul class="todo-list-content" *ngIf='todoItems.length; else empty'>
       <li *ngFor='let todo of todoItems | todo_filter:searchString; let idx = index'>
         <p>
-          <label [attr.data-tooltip]='todo.description' class='tooltipped'>
+          <label>
             <input type="checkbox" [checked]='todo.done' (change)='onChecked(todo.id)'/>
             <span class="todo-title" [class.done]='todo.done'>{{ todo.title }}</span>
           </label>
