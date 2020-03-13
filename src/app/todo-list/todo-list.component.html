@@ -15,6 +15,7 @@
             <span class="todo-title" [class.done]='todo.done'>{{ todo.title }}</span>
           </label>
         </p>
+        <span class="todo-description"> | {{todo.description}}</span>
         <div class="side-content">
           <small>{{ todo.start | term_checker:todo.end }}</small>
           <button class="btn-floating btn-small waves-effect waves-light teal darken-1" (click)='onEdit(todo.id)'><i class="material-icons">edit</i></button>
