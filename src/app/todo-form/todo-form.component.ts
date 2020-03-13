@@ -4,10 +4,10 @@ import {
   AfterViewInit,
   ViewChild,
   ElementRef
-} from "@angular/core";
-import { TodoService, ITodo } from "../common/todo.service";
-import * as M from "../../../node_modules/materialize-css/dist/js/materialize.min.js";
-import * as moment from 'moment';
+} from "@angular/core"
+import { TodoService, ITodo } from "../common/todo.service"
+import * as M from "../../../node_modules/materialize-css/dist/js/materialize.min.js"
+import * as moment from 'moment'
 
 @Component({
   selector: "app-todo-form",
@@ -15,37 +15,37 @@ import * as moment from 'moment';
   styleUrls: ["./todo-form.component.css"]
 })
 export class TodoFormComponent implements OnInit, AfterViewInit {
-  @ViewChild("todoTitle") todoTitle: ElementRef;
-  @ViewChild("todoDescription") todoDescription: ElementRef;
-  private todoEnd: any;
+  @ViewChild("todoTitle") todoTitle: ElementRef
+  @ViewChild("todoDescription") todoDescription: ElementRef
+  private todoEnd: any
   private updatedItem: ITodo = null
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit() {
-    this.todoService.onEditItem.subscribe({
+    this.todoService.editItem.subscribe({
       next: todo => {
         if (!todo) return
         this.todoTitle.nativeElement.value = todo.title
         this.todoDescription.nativeElement.value = todo.description
         this.todoEnd.el.value = moment(todo.end).format('MMM DD,YYYY')
         this.updatedItem = todo
-        M.updateTextFields();
+        M.updateTextFields()
       }
-    });
+    })
   }
 
   ngAfterViewInit() {
     const instance = M.Datepicker.init(document.querySelector(".datepicker"), {
       minDate: new Date(),
       autoClose: true
-    });
-    this.todoEnd = instance;
+    })
+    this.todoEnd = instance
   }
 
   onUpdate() {
-    const title = this.todoTitle.nativeElement;
-    const description = this.todoDescription.nativeElement;
+    const title = this.todoTitle.nativeElement
+    const description = this.todoDescription.nativeElement
     const todo: ITodo = {
       id: Date.now(),
       title: title.value,
@@ -60,11 +60,11 @@ export class TodoFormComponent implements OnInit, AfterViewInit {
       this.todoService.edit(todo)
       this.updatedItem = null
     } else {
-      this.todoService.onAdd(todo);
+      this.todoService.onAdd(todo)
     }
-    title.value = "";
-    description.value = "";
-    this.todoEnd.el.value = "";
-    M.updateTextFields();
+    title.value = ""
+    description.value = ""
+    this.todoEnd.el.value = ""
+    M.updateTextFields()
   }
 }

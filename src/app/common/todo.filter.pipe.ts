@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { ITodo } from './todo.service';
+import { Pipe, PipeTransform } from '@angular/core'
+import { ITodo } from './todo.service'
 
 @Pipe({
   name: 'todo_filter'

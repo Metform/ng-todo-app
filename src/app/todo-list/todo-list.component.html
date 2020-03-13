@@ -2,24 +2,24 @@
       <div class="input-field">
         <i class="material-icons prefix">search</i>
         <label class="active">Todo title</label>
-        <input type="text" [(ngModel)]='searchString'>
+        <input type="text" [(ngModel)]="searchString">
       </div>
-      <button class="waves-effect waves-light red btn-small" (click)='onClearDone()'>Clear completed</button>
+      <button class="waves-effect waves-light red btn-small" (click)="onClearDone()">Clear completed</button>
 </div>
 <div class="todo-list-container">
-    <ul class="todo-list-content" *ngIf='todoItems.length; else empty'>
-      <li *ngFor='let todo of todoItems | todo_filter:searchString; let idx = index'>
+    <ul class="todo-list-content" *ngIf="todoItems.length; else empty">
+      <li *ngFor="let todo of todoItems | todo_filter:searchString; let idx = index">
         <p>
           <label>
-            <input type="checkbox" [checked]='todo.done' (change)='onChecked(todo.id)'/>
-            <span class="todo-title" [class.done]='todo.done'>{{ todo.title }}</span>
+            <input type="checkbox" [checked]="todo.done" (change)="onChecked(todo.id)"/>
+            <span class="todo-title" [class.done]="todo.done">{{ todo.title }}</span>
           </label>
         </p>
         <span class="todo-description"> | {{todo.description}}</span>
         <div class="side-content">
           <small>{{ todo.start | term_checker:todo.end }}</small>
-          <button class="btn-floating btn-small waves-effect waves-light teal darken-1" (click)='onEdit(todo.id)'><i class="material-icons">edit</i></button>
-          <button type='reset' class="btn-floating btn-small waves-effect waves-light red" (click)='onRemove(todo.id)'><i class="material-icons">clear</i></button>
+          <button class="btn-floating btn-small waves-effect waves-light teal darken-1" (click)="onEdit(todo.id)"><i class="material-icons">edit</i></button>
+          <button type="reset" class="btn-floating btn-small waves-effect waves-light red" (click)="onRemove(todo.id)"><i class="material-icons">clear</i></button>
         </div>
       </li>
     </ul>

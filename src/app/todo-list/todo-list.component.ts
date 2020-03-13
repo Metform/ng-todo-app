@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { ITodo, TodoService } from "../common/todo.service";
+import { Component, OnInit } from "@angular/core"
+import { ITodo, TodoService } from "../common/todo.service"
 
 @Component({
   selector: "app-todo-list",
@@ -7,29 +7,29 @@ import { ITodo, TodoService } from "../common/todo.service";
   styleUrls: ["./todo-list.component.css"]
 })
 export class TodoListComponent implements OnInit {
-  private searchString = "";
-  private todoItems: ITodo[] = [];
+  private searchString = ''
+  private todoItems: ITodo[] = []
   constructor(private todoService: TodoService) {}
 
   ngOnInit() {
     this.todoService.todoCollection.subscribe({
       next: todoItems => {
         if (!todoItems) return
-        this.todoItems = todoItems;
+        this.todoItems = todoItems
       }
-    });
+    })
   }
 
   onChecked(id: number) {
-    this.todoService.onChecked(id);
+    this.todoService.onChecked(id)
   }
 
   onEdit(id: number) {
-    this.todoService.onEdit(id);
+    this.todoService.onEdit(id)
   }
 
   onRemove(id: number) {
-    this.todoService.onRemove(id);
+    this.todoService.onRemove(id)
   }
 
   onClearDone() {
