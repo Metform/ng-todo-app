@@ -17,12 +17,14 @@ export class TodoListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    M.Tooltip.init(document.querySelectorAll('.tooltipped'), {
-      enterDelay: 300,
-      inDuration: 350,
-      position: 'left',
-      transitionMovement: 20
-    })
+    setTimeout(() => {
+      M.Tooltip.init(document.querySelectorAll('.tooltipped'), {
+        enterDelay: 300,
+        inDuration: 350,
+        position: 'left',
+        transitionMovement: 20
+      })
+    }, 1)
   }
 
   onChecked(id: number) {
