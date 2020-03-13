@@ -1,6 +1,12 @@
-# NgTodoApp
+# Основные функции
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.4.
+- Создание/удаление/редактирование/поиск(по названию)
+- Слежение за процессом выполнения
+- Весь функционал работает без сервера
+
+# Использовалось
+ - База данных Indexedb
+ - css фреймворк Materializecss 
 
 ## Development server
 
