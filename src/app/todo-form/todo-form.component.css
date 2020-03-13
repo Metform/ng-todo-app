@@ -1,0 +1,22 @@
+.form-container {
+    max-width: 60vw;
+    margin: 50px auto 10px;
+    display: flex;
+    align-items: center;
+}
+
+.form-container > div:first-child {
+    flex-basis: 40%;
+}
+
+.form-container > div:nth-child(2) {
+    flex-basis: 40%;
+}
+
+.form-container > div:nth-child(3) {
+    flex-basis: 15%;
+}
+
+.form-container > button {
+    margin-left: 5px;
+}

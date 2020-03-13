@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import * as M from '../../../node_modules/materialize-css/dist/js/materialize.js';
-import { TodoService } from '../common/todo.service.js';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import * as M from '../../../node_modules/materialize-css/dist/js/materialize.min.js';
+import { ITodo, TodoService } from '../common/todo.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,14 +8,16 @@ import { TodoService } from '../common/todo.service.js';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit, AfterViewInit {
-  @ViewChild('todoTitle') todoTitleEl: ElementRef
-
+  private searchString = ''
+  private todoItems: ITodo[] = []
   constructor(private todoService: TodoService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.todoService.todoCollection.subscribe({next: todoItems => this.todoItems = todoItems})
+  }
 
   ngAfterViewInit() {
-    M.Tooltip.init(this.todoTitleEl.nativeElement, {
+    M.Tooltip.init(document.querySelectorAll('.tooltipped'), {
       enterDelay: 300,
       inDuration: 350,
       position: 'left',
@@ -23,14 +25,19 @@ export class TodoListComponent implements OnInit, AfterViewInit {
     })
   }
 
-  onChecked(id: string) {
+  onChecked(id: number) {
     this.todoService.onChecked(id)
   }
 
-  onEdit(id: string) {}
+  onEdit(id: number) {
+    this.todoService.onEdit(id)
+  }
 
-  onRemove(id: string) {
-    console.log(`id = `, id)
+  onRemove(id: number) {
     this.todoService.onRemove(id)
+  }
+
+  onPaginate({ target: { textContent } }) {
+    console.log(textContent)
   }
 }

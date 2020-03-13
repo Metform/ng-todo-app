@@ -1,35 +1,61 @@
 import { Injectable } from "@angular/core";
-import { NgxIndexedDBService } from 'ngx-indexed-db'
+import { NgxIndexedDBService } from "ngx-indexed-db";
+import { Observable, interval, from, BehaviorSubject } from 'rxjs';
 
 export interface ITodo {
-  id: string;
+  id?: number;
   title: string;
   description: string;
   done: boolean;
-  date?: Date;
+  start?: Date;
+  end?: Date;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: "root"
+})
 export class TodoService {
-  public todoItems: ITodo[] = [
-    {
-      id: "1",
-      title: "buy milk",
-      description: "house in the village",
-      done: false,
-      date: new Date()
-    }
-  ];
+  public todoCollection = new BehaviorSubject<ITodo[]>([])
 
-  constructor(private dbService: NgxIndexedDBService) {}
-
-  onChecked(id: string) {
-    this.todoItems.forEach(todo =>
-      todo.id === id ? (todo.done = !todo.done) : null
-    );
+  constructor(private idbService: NgxIndexedDBService) {
+    this.getAll()
   }
 
-  onRemove(id: string) {
-      this.todoItems = this.todoItems.filter(todo => todo.id !== id)
+  async getAll() {
+    const items = await this.idbService.getAll<ITodo>('todoList')
+    this.todoCollection.next(items)
+  }
+
+  async onChecked(id: number) {
+    try {
+      const item = await this.idbService.getByKey('todoList', id)
+      item.done = !item.done
+      await this.idbService.update('todoList', { id, ...item })
+      this.getAll()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async onAdd(todo: ITodo) {
+    try {
+      await this.idbService.add("todoList", todo)
+      this.getAll()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  onEdit(id: number) {
+    console.log(id);
+  }
+
+  async onRemove(id: number): Promise<any> {
+    try {
+      await this.idbService.deleteRecord('todoList', id)
+      this.getAll()
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
