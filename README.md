@@ -1,3 +1,5 @@
+<img src='https://iran-tour-bucket.s3.eu-north-1.amazonaws.com/NgTodoApp+-+Google+Chrome+13.03.2020+13_21_56.png'></img>
+
 # Основные функции
 
 - Создание/удаление/редактирование/поиск(по названию)
